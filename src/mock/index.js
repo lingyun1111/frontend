@@ -1,9 +1,11 @@
 import Mock from 'mockjs'
 import { param2Obj } from '@/utils'
 import user from './user'
+import table from './table'
 
 const mocks = [
-  ...user
+  ...user,
+  ...table
 ]
 
 // 延时请求到数据
@@ -50,9 +52,10 @@ export function mockXHR () {
 }
 
 // for mock server
+/* global AJAXURL */
 const responseFake = (url, type, respond) => {
   return {
-    url: new RegExp(`${process.env.VUE_APP_BASE_API}${url}`),
+    url: new RegExp(`${AJAXURL}${url}`),
     type: type || 'get',
     response (req, res) {
       console.log('request invoke:' + req.path)
