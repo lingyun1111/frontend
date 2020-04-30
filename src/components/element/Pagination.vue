@@ -3,8 +3,10 @@
     class="pagination"
     background
     :layout="layout"
-    :total="pagination.total"
-    :page-sizes="pageSize"
+    :total="table.total"
+    :current-page="table.pages.page"
+    :page-size="table.pages.size"
+    :page-sizes="pageSizes"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
   >
@@ -14,23 +16,28 @@
 <script>
 export default {
   props: {
-    pagination: Object,
+    table: Object,
     layout: {
       type: String,
       default: 'sizes, prev, pager, next, jumper, ->, total, slot'
     },
-    pageSize: {
+    pageSizes: {
       type: Array,
       default: () => [5, 10, 20, 30, 40, 50, 100]
     }
   },
+  created () {
+    console.log('v', this.table)
+  },
   methods: {
     handleSizeChange (val) {
-      this.$emit('change', val)
+      this.table.pages.size = val
+      this.$emit('change', this.table.pages)
       console.log(`每页 ${val} 条`)
     },
     handleCurrentChange (val) {
-      this.$emit('change', val)
+      this.table.pages.page = val
+      this.$emit('change', this.table.pages)
       console.log(`当前页: ${val}`)
     }
   }

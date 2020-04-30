@@ -8,8 +8,9 @@ const getDefaultState = () => {
       total: 0,
       pages: {
         page: 1,
-        size: 10
-      }
+        size: 20
+      },
+      search: {}
     }
   }
 }
@@ -28,8 +29,7 @@ const mutations = {
 const actions = {
   async tablelist ({ commit, state }, value) {
     commit('SET_TABLE', { load: true })
-    const res = await tablist()
-    console.log('res', res)
+    const res = await tablist({ ...state.table.pages, ...state.table.search })
     const { list, total } = res.data
     commit('SET_TABLE', {
       load: false,
