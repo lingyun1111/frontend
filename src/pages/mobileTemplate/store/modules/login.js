@@ -1,26 +1,36 @@
 
-const login = {
-  state: {
-    title: '三真互联网医院综合服务管理平台', // 系统名字
-    user: JSON.parse(sessionStorage.getItem('user')) || null,
-    isCollapse: false, // nav是否收起
-    newrouter: [] // 路由
-  },
-  mutations: {
-    SET_USER: (state, user) => {
-      state.user = user
-    }
-  },
-  actions: {
-    // 登录
-    Logins ({ commit }, info) {
-      return new Promise((resolve, reject) => {
-        commit('SET_USER', info)
-        resolve(info)
-      }).catch(error => {
-        reject(error)
-      })
-    }
+const getDefaultState = () => {
+  return {
+    token: null,
+    userInfo: {},
+    test: 'qqqqq'
   }
 }
-export default login
+
+const state = getDefaultState()
+
+const mutations = {
+  RESET_STATE: (state) => {
+    Object.assign(state, getDefaultState())
+  },
+  SET_TOKEN: (state, token) => {
+    state.token = token
+  }
+
+}
+
+const actions = {
+  // user login
+  login ({ commit }, userInfo) {
+    return new Promise((resolve, reject) => {
+      resolve()
+    })
+  }
+}
+
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions
+}

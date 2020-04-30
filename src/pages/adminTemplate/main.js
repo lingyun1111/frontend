@@ -11,14 +11,25 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import '@adminTemplate/styles/index.scss' // global css
-import '@adminTemplate/permission' // 权限控制
+import '@adminTemplate/permission' // permission control
+
+import Toasted from 'vue-toasted'
 
 Vue.use(store)
-Vue.use(Element) // permission control
+Vue.use(Element)
+Vue.use(Toasted, {
+  position: 'top-center',
+  duration: 300000,
+  theme: 'toasted-primary',
+  iconPack: 'mdi',
+  fitToScreen: true,
+  type: 'error',
+  icon: 'mdi-file-table'
+})
 
 if (process.env.NODE_ENV === 'development') {
-  const { mockXHR } = require('@/mock')
-  mockXHR()
+  // const { mockXHR } = require('@/mock')
+  // mockXHR()
 }
 
 Vue.config.productionTip = false

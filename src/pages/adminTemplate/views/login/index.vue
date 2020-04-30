@@ -98,18 +98,19 @@ export default {
       this.$refs.loginForm.validate(async valid => {
         if (valid) {
           this.loading = true
-          await this.$store.dispatch('user/login', this.loginForm)
-          this.$router.push({ path: this.redirect || '/' })
+          try {
+            await this.$store.dispatch('user/login', this.loginForm)
+            this.$router.push({ path: this.redirect || '/' })
+          } catch (e) {
+
+          }
           this.loading = false
-        } else {
-          console.log('error submit!!')
-          return false
         }
       })
     }
   },
   created () {
-    console.log(this.$store)
+
   }
 }
 </script>
