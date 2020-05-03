@@ -13,7 +13,11 @@ import '@mdi/font/css/materialdesignicons.css'
 import '@adminTemplate/styles/index.scss' // global css
 import '@adminTemplate/permission' // permission control
 
+import VueCompositionApi from '@vue/composition-api'
+
 import Toasted from 'vue-toasted'
+
+Vue.use(VueCompositionApi)
 
 Vue.use(store)
 Vue.use(Element)
@@ -26,10 +30,10 @@ Vue.use(Toasted, {
   type: 'error',
   icon: 'mdi-file-table'
 })
-
-if (process.env.NODE_ENV === 'development') {
-  // const { mockXHR } = require('@/mock')
-  // mockXHR()
+/* global envName */
+if (envName === 'mock') {
+  const { mockXHR } = require('@/mock')
+  mockXHR()
 }
 
 Vue.config.productionTip = false

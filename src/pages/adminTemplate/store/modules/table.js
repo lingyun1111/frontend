@@ -1,4 +1,4 @@
-import { tablist } from '@adminTemplate/api/table'
+import { tablist, add, edit } from '@adminTemplate/api/table'
 
 const getDefaultState = () => {
   return {
@@ -8,7 +8,7 @@ const getDefaultState = () => {
       total: 0,
       pages: {
         page: 1,
-        size: 20
+        size: 10
       },
       search: {}
     }
@@ -27,6 +27,7 @@ const mutations = {
 }
 
 const actions = {
+  // 获取列表
   async tablelist ({ commit, state }, value) {
     commit('SET_TABLE', { load: true })
     const res = await tablist({ ...state.table.pages, ...state.table.search })
@@ -36,6 +37,16 @@ const actions = {
       list,
       total
     })
+  },
+  // 添加
+  async add ({ commit, state }, value) {
+    const res = await add(value)
+    return Promise.resolve(res)
+  },
+  // 编辑
+  async edit ({ commit, state }, value) {
+    const res = await edit(value)
+    return Promise.resolve(res)
   }
 }
 

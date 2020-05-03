@@ -14,7 +14,24 @@
 </template>
 
 <script>
+import { getCurrentInstance } from '@vue/composition-api'
 export default {
+  setup (props) {
+    const ctx = getCurrentInstance()
+    const { table } = props
+    const handleCurrentChange = (val) => {
+      table.pages.page = val
+      ctx.$emit('change', table.pages)
+    }
+    const handleSizeChange = (val) => {
+      table.pages.size = val
+      ctx.$emit('change', table.pages)
+    }
+    return {
+      handleCurrentChange,
+      handleSizeChange
+    }
+  },
   props: {
     table: Object,
     layout: {
@@ -25,23 +42,9 @@ export default {
       type: Array,
       default: () => [5, 10, 20, 30, 40, 50, 100]
     }
-  },
-  created () {
-    console.log('v', this.table)
-  },
-  methods: {
-    handleSizeChange (val) {
-      this.table.pages.size = val
-      this.$emit('change', this.table.pages)
-      console.log(`每页 ${val} 条`)
-    },
-    handleCurrentChange (val) {
-      this.table.pages.page = val
-      this.$emit('change', this.table.pages)
-      console.log(`当前页: ${val}`)
-    }
   }
 }
+
 </script>
 
 <style lang="scss" scoped>

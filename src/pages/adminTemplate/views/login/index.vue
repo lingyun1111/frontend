@@ -1,4 +1,3 @@
-
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
@@ -41,7 +40,6 @@
           <i class="mdi" :class="passwordType === 'password' ? 'mdi-eye' : ' mdi-eye-off'"></i>
         </span>
       </el-form-item>
-
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
 <!--      <div class="tips">-->
@@ -55,62 +53,54 @@
 
 <script>
 import validate from '@/utils/elementValidate/index.js'
+import { reactive, ref, watch, getCurrentInstance } from '@vue/composition-api'
 export default {
-  name: 'Login',
-  data () {
-    return {
-      loginForm: {
-        username: 'admin',
-        password: '111111'
-      },
-      loginRules: {
-        username: [{ trigger: 'blur', validator: validate.add, type: 'userName', msg: '用户名' }],
-        password: [{ trigger: 'blur', validator: validate.add, type: 'userPassword', msg: '用户密码' }]
-      },
-      loading: false,
-      passwordType: 'password',
-      redirect: undefined
+  setup () {
+    const xtc = getCurrentInstance()
+    const loginForm = reactive({
+      username: 'admin',
+      password: '111111'
+    })
+    const loginRules = reactive({
+      username: [{ trigger: 'blur', validator: validate.add, type: 'userName', msg: '用户名' }],
+      password: [{ trigger: 'blur', validator: validate.add, type: 'userPassword', msg: '用户密码' }]
+    })
+    const loading = ref(false)
+    const passwordType = ref('password')
+    let redirect = ref(undefined)
 
-    }
-  },
-  watch: {
-    $route: {
-      handler: function (route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    // 显示隐藏密码
-    showPwd () {
-      if (this.passwordType === 'password') {
-        this.passwordType = ''
-      } else {
-        this.passwordType = 'password'
-      }
-      this.$nextTick(() => {
-        this.$refs.password.focus()
+    watch(() => xtc.$route,
+      (route) => {
+        redirect = route.query && route.query.redirect
       })
-    },
+    // 显示隐藏密码
+    const showPwd = () => {
+      passwordType.value = passwordType.value === 'password' ? '' : 'password'
+    }
     // 进行登录，如果url redirect带有路径，则跳转到该路径
-    handleLogin () {
-      this.$refs.loginForm.validate(async valid => {
+    const handleLogin = () => {
+      xtc.$refs.loginForm.validate(async valid => {
         if (valid) {
-          this.loading = true
+          loading.value = true
           try {
-            await this.$store.dispatch('user/login', this.loginForm)
-            this.$router.push({ path: this.redirect || '/' })
+            await xtc.$store.dispatch('user/login', loginForm)
+            xtc.$router.push({ path: redirect || '/' })
           } catch (e) {
 
           }
-          this.loading = false
+          loading.value = false
         }
       })
     }
-  },
-  created () {
-
+    return {
+      loginForm,
+      loginRules,
+      loading,
+      passwordType,
+      redirect,
+      showPwd,
+      handleLogin
+    }
   }
 }
 </script>

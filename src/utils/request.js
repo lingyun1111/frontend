@@ -32,14 +32,13 @@ service.interceptors.response.use(
     const res = response.data
     if (res.code !== 200) {
       Vue.toasted.show(res.message || '出错了')
-
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
     }
   },
   error => {
-    Vue.toasted.show(error.message || '出错了')
+    Vue.toasted.show('发生错误')
     return Promise.reject(error)
   }
 )

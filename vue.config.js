@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const fs = require('fs')
 const pages = {}
 const files = fs.readdirSync('./src/pages')
+const env = require('./env')
 console.log('files', files)
 files.forEach(n => {
   pages[n] = {
@@ -16,21 +17,10 @@ files.forEach(n => {
   }
 })
 const page = {}
-const projectname = process.argv[3].replace('--', '') // 获取build后面的参数确定执行哪个文件
-const configname = process.argv[4] // 环境变量
-page[projectname] = pages[projectname]
+const projectName = process.argv[3].replace('--', '') // 获取build后面的参数确定执行哪个文件
+const envName = process.argv[4] // 环境变量
+page[projectName] = pages[projectName]
 
-// 环境变量
-const config = {
-  local: {
-    AJAXURL: "'http://test.cc'",
-    APPID: "'wxb20e3398be5e55b5'"
-  },
-  demo: {
-    AJAXURL: "'http://yljk.fylogistics.cn'",
-    APPID: "'wxb20e3398be5e55b5'"
-  }
-}
 const path = require('path')
 function resolve (dir) {
   return path.join(__dirname, dir)
@@ -38,13 +28,14 @@ function resolve (dir) {
 
 module.exports = {
   publicPath: './',
-  outputDir: 'dist' + projectname, // 包名
+  outputDir: 'dist' + projectName, // 包名
   pages: page,
   productionSourceMap: false,
   configureWebpack: {
     plugins: [
-      new webpack.DefinePlugin(Object.assign({}, config[configname], {
-        projectname: JSON.stringify(projectname)
+      new webpack.DefinePlugin(Object.assign({}, env[envName], {
+        projectName: JSON.stringify(projectName),
+        envName: JSON.stringify(envName)
       }))
     ]
   },

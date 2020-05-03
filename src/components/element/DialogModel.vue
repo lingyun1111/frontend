@@ -1,24 +1,32 @@
 <template>
   <div>
     <el-dialog
-      title="提示"
+      :title="title"
       :visible.sync="dialogVisible"
-      width="30%"
+      :width="width"
       :before-close="handleClose">
       <div>
         <slot></slot>
       </div>
-      <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-  </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import dialog from './_dialog'
+import { onDialog } from './onDialog'
 export default {
-  mixins: [dialog]
+  setup () {
+    const { dialogVisible, handleClose } = onDialog()
+    return {
+      dialogVisible,
+      handleClose
+    }
+  },
+  props: {
+    title: String,
+    width: {
+      default: '30%'
+    }
+  }
 }
 </script>

@@ -6,18 +6,13 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-// import { mapActions, mapState, mapMutations, mapGetters } from 'vuex'
+import { computed } from '@vue/composition-api'
 export default {
-  name: 'Dashboard',
-  computed: {
-    ...mapState({
-      test: state => state.user.test,
-      userInfo: state => state.user.userInfo
-    })
-  },
-  mounted () {
-
+  setup (props, { root }) {
+    const userInfo = computed(() => root.$store.state.user.userInfo)
+    return {
+      userInfo
+    }
   }
 }
 </script>

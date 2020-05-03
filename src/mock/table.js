@@ -21,5 +21,27 @@ export default [
         }
       })
     }
+  },
+  {
+    url: '/add',
+    type: 'post',
+    response: config => {
+      console.log('config', config)
+      return Mock.mock({
+        code: 200,
+        data: '添加成功'
+      })
+    }
+  },
+  {
+    url: '/edit',
+    type: 'post',
+    response: config => {
+      console.log('config', config)
+      return Mock.mock({
+        code: 200,
+        data: '编辑成功'
+      })
+    }
   }
 ]
