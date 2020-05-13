@@ -16,7 +16,15 @@ export default {
       return 'err'
     }
     return false
+  },
+  // 非空数组
+  emptyArr (value = []) {
+    if (!value || !value.length) {
+      return null
+    }
+    return true
   }
+
 }
 
 export function isExternal (path) {

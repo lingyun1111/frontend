@@ -2,10 +2,12 @@ import Mock from 'mockjs'
 import { param2Obj } from '@/utils'
 import user from './user'
 import table from './table'
+import activity from './activity'
 
 const mocks = [
   ...user,
-  ...table
+  ...table,
+  ...activity
 ]
 
 // 延时请求到数据

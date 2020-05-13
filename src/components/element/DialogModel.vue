@@ -4,6 +4,7 @@
       :title="title"
       :visible.sync="dialogVisible"
       :width="width"
+      :fullscreen="fullscreen"
       :before-close="handleClose">
       <div>
         <slot></slot>
@@ -26,6 +27,9 @@ export default {
     title: String,
     width: {
       default: '30%'
+    },
+    fullscreen: {
+      default: false
     }
   }
 }

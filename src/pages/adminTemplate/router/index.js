@@ -38,6 +38,12 @@ export const constantRoutes = [
         meta: { title: '树形结构', icon: 'mdi mdi-file-table' }
       },
       {
+        path: 'activity',
+        name: 'activity',
+        component: () => import('@adminTemplate/views/activity/index'),
+        meta: { title: '活动管理', icon: 'mdi mdi-file-table' }
+      },
+      {
         path: 'test',
         name: 'Test',
         // hidden: true,

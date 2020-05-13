@@ -15,6 +15,7 @@
         <el-option label="女" value="beijing"></el-option>
       </el-select>
     </el-form-item>
+    <slot name="item" :form="ruleForm" ></slot>
     <el-form-item>
       <slot :form="ruleForm"></slot>
     </el-form-item>
@@ -41,6 +42,9 @@ export default {
       ],
       sex: [
         { required: true, message: '请选择性别', trigger: 'change' }
+      ],
+      job: [
+        { required: true, message: '请输入工作', trigger: 'blur' }
       ]
     })
     // 重置
@@ -75,7 +79,6 @@ export default {
       add,
       edit
     }
-  },
-  props: ['type']
+  }
 }
 </script>
