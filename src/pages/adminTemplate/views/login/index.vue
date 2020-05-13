@@ -1,11 +1,9 @@
 <template>
   <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
       <div class="title-container">
         <h3 class="title">登录</h3>
       </div>
-
       <el-form-item prop="username">
         <span class="svg-container">
           <i class="mdi mdi-account"></i>
@@ -20,7 +18,6 @@
           auto-complete="on"
         />
       </el-form-item>
-
       <el-form-item prop="password">
         <span class="svg-container">
           <i class="mdi mdi-lock"></i>
@@ -65,6 +62,7 @@ export default {
       username: [{ trigger: 'blur', validator: validate.add, type: 'userName', msg: '用户名' }],
       password: [{ trigger: 'blur', validator: validate.add, type: 'userPassword', msg: '用户密码' }]
     })
+
     const loading = ref(false)
     const passwordType = ref('password')
     let redirect = ref(undefined)

@@ -61,9 +61,12 @@ div:focus {
 
 // main-container global css
 .app-container {
-  padding: 20px;
+  padding: 15px 15px 0 15px
 }
 
+.flex_column{
+  flex-direction: column;
+}
 .flex{
   display: flex;
 }

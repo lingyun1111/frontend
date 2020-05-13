@@ -46,7 +46,9 @@ service.interceptors.response.use(
 // get方法
 export const GET = (url = '', params = {}) => {
   return new Promise((resolve, reject) => {
-    service.get(url, params).then(res => {
+    service.get(url, {
+      params: params
+    }).then(res => {
       resolve(res)
     }).catch(err => {
       reject(err)

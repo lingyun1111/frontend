@@ -6,10 +6,10 @@
     </search>
 <!--    表格-->
     <el-table
+      height="calc(100vh - 210px)"
       :data="table.list"
       stripe
-      v-loading="table.load"
-      style="width: 100%">
+      v-loading="table.load">
       <el-table-column prop="avatar" label="头像" width="130">
         <template v-slot="scope">
           <el-image
@@ -66,7 +66,7 @@ import Search from './search'
 import Form from './form'
 
 import { useTable } from './useTable'
-import { getCurrentInstance, ref } from '@vue/composition-api'
+import { getCurrentInstance, ref, onMounted } from '@vue/composition-api'
 export default {
   setup () {
     const xtc = getCurrentInstance()
@@ -106,6 +106,9 @@ export default {
       btnLoading.value = false
     }
 
+    onMounted(() => {
+
+    })
     return {
       table,
       tablelist,

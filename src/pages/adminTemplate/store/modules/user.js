@@ -5,8 +5,7 @@ import { resetRouter } from '@adminTemplate/router'
 const getDefaultState = () => {
   return {
     token: null,
-    userInfo: {},
-    test: 'qqqqq'
+    userInfo: {}
   }
 }
 

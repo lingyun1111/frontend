@@ -5,10 +5,11 @@ export default [
     type: 'post',
     response: config => {
       console.log('config', config)
+      const { body } = config
       return Mock.mock({
         code: 200,
         data: {
-          'list|10': [{
+          [`list|${body.size + ''}`]: [{
             avatar: Mock.Random.image('200x100'),
             token: '9527',
             'id|+1': 1,

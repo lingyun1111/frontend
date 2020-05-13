@@ -1,9 +1,10 @@
 import defaultSettings from '@adminTemplate/settings'
-const { showSettings, fixedHeader, sidebarLogo } = defaultSettings
+const { showSettings, fixedHeader, sidebarLogo, tagsView } = defaultSettings
 
 const state = {
   showSettings: showSettings,
   fixedHeader: fixedHeader,
+  tagsView: tagsView,
   sidebarLogo: sidebarLogo
 }
 
