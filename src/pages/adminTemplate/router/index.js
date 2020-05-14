@@ -26,16 +26,16 @@ export const constantRoutes = [
     meta: { title: '元素', icon: 'el-icon-eleme' },
     children: [
       {
+        path: 'basic',
+        name: 'basicTable',
+        component: () => import('@adminTemplate/views/table/basic'),
+        meta: { title: '基础表格', icon: 'mdi mdi-file-table' }
+      },
+      {
         path: 'table',
         name: 'Table',
         component: () => import('@adminTemplate/views/table/index'),
-        meta: { title: 'Table', icon: 'mdi mdi-file-table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@adminTemplate/views/tree/index'),
-        meta: { title: '树形结构', icon: 'mdi mdi-file-table' }
+        meta: { title: '带form的表格', icon: 'mdi mdi-file-table' }
       },
       {
         path: 'activity',
@@ -65,7 +65,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@adminTemplate/views/form/index'),
-        meta: { title: 'Form', icon: 'mdi mdi-file-table' }
+        meta: { title: '表单', icon: 'mdi mdi-file-table' }
       }
     ]
   },
@@ -135,13 +135,15 @@ export const constantRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
+export const asyncRoutes = []
+
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
-
 const router = createRouter()
+
 export function resetRouter () {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router

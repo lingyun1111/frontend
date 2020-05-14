@@ -4,7 +4,9 @@
       :title="title"
       :visible.sync="dialogVisible"
       :width="width"
+      :top="top"
       :fullscreen="fullscreen"
+      :modal-append-to-body="false"
       :before-close="handleClose">
       <div>
         <slot></slot>
@@ -25,6 +27,9 @@ export default {
   },
   props: {
     title: String,
+    top: {
+      default: '10vh'
+    },
     width: {
       default: '30%'
     },

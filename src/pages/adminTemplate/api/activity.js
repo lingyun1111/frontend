@@ -9,3 +9,8 @@ export const getActivityList = data => {
 export const getcore = data => {
   return POST('/getcore', data)
 }
+
+// 获取部门树
+export const getdep = data => {
+  return POST('/getdep', data)
+}

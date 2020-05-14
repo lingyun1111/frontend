@@ -28,7 +28,7 @@ const mutations = {
 
 const actions = {
   // 获取列表
-  async tablelist ({ commit, state }, value) {
+  async tablelist ({ commit, state }) {
     commit('SET_TABLE', { load: true })
     const res = await tablist({ ...state.table.pages, ...state.table.search })
     const { list, total } = res.data

@@ -5,8 +5,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'about',
-    component: () => import('../views/About.vue')
+    redirect: '/login',
+    name: 'about'
   },
   {
     path: '/index',

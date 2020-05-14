@@ -43,8 +43,9 @@ export default {
     return {
       autoUpdate: true,
       friends: ['Sandra Adams', 'Britta Holt'],
-      isUpdating: false
-
+      isUpdating: false,
+      name: null,
+      title: null
     }
   },
 
