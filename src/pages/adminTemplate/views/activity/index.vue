@@ -108,12 +108,14 @@ export default {
       showComponent.value = val
       ctx.$refs[ref].dialogVisible = true
     }
+    // 编辑确认
     function edit () {
       let arr = showComponent.value.split(',')
       arr = arr.map(n => {
         const item = ctx.$refs[n].$refs[n]
         return item.validate()
       })
+      console.log('arr', arr)
       Promise.all(arr).then(res => {
         alert('校验通过')
         console.log('res', res)
