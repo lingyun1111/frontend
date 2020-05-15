@@ -17,7 +17,8 @@
 
 <script>
 import { onDialog } from './onDialog'
-export default {
+import { createComponent } from '@vue/composition-api'
+export default createComponent({
   setup () {
     const { dialogVisible, handleClose } = onDialog()
     return {
@@ -37,5 +38,5 @@ export default {
       default: false
     }
   }
-}
+})
 </script>

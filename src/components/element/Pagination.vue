@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import { getCurrentInstance } from '@vue/composition-api'
-export default {
+import { getCurrentInstance, createComponent } from '@vue/composition-api'
+export default createComponent({
   setup (props) {
     const ctx = getCurrentInstance()
     const { table } = props
@@ -43,7 +43,7 @@ export default {
       default: () => [5, 10, 20, 30, 40, 50, 100]
     }
   }
-}
+})
 
 </script>
 

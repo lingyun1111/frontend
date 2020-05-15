@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
-/* Layout */
-import Layout from '@adminTemplate/layout'
+import Layout from '../layout'
 
 Vue.use(Router)
 
@@ -47,7 +45,7 @@ export const constantRoutes = [
         path: 'test',
         name: 'Test',
         // hidden: true,
-        component: () => import('@adminTemplate/views/test'),
+        component: () => import('@adminTemplate/views/Test'),
         meta: { title: '测试页面', icon: 'mdi mdi-file-table' }
       }
     ]
