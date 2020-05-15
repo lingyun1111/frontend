@@ -7,7 +7,7 @@
     </el-steps>
     <div style="margin-top: 35px">
       <basic ref="basic" v-if="active===0"></basic>
-      <setup v-if="active===1"></setup>
+      <setup ref="setup" v-if="active===1"></setup>
       <subject v-if="active===2"></subject>
 
       <div style="margin-top: 15px;text-align: center">
@@ -28,19 +28,20 @@ import { useForm } from './useForm'
 import { ref, getCurrentInstance } from '@vue/composition-api'
 export default {
   setup () {
-    const xtc = getCurrentInstance()
-    const { Basic } = useForm()
+    const ctx = getCurrentInstance()
+    const { Basic, Setup } = useForm()
 
     // 步骤条
     const active = ref(0)
 
     async function next () {
       let basic
+      let setup
       switch (active.value) {
         case 0:
           try {
             console.log('基础表单数据', Basic)
-            basic = xtc.$refs.basic.$refs.basic
+            basic = ctx.$refs.basic.$refs.basic
             await basic.validate()
             active.value++
           } catch (e) {
@@ -48,10 +49,17 @@ export default {
           }
           break
         case 1:
-          active.value++
+          try {
+            console.log('填报设置数据', Setup)
+            setup = ctx.$refs.setup.$refs.setup
+            await setup.validate()
+            active.value++
+          } catch (e) {
+            console.log(e)
+          }
           break
         case 2:
-          xtc.$emit('close')
+          ctx.$emit('close')
           break
       }
       // active.value++

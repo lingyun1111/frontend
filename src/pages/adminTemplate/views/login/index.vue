@@ -71,6 +71,7 @@ export default {
       (route) => {
         redirect = route.query && route.query.redirect
       })
+
     // 显示隐藏密码
     const showPwd = () => {
       passwordType.value = passwordType.value === 'password' ? '' : 'password'
@@ -84,7 +85,7 @@ export default {
             await xtc.$store.dispatch('user/login', loginForm)
             xtc.$router.push({ path: redirect || '/' })
           } catch (e) {
-
+            console.log(e)
           }
           loading.value = false
         }

@@ -24,7 +24,6 @@
       <el-tree
         :data="Cores"
         show-checkbox
-        default-expand-all
         node-key="id"
         ref="tree"
         :default-checked-keys="Basic.core"
@@ -53,7 +52,7 @@ export default {
         { required: true, message: '请选择活动时间', trigger: 'change' }
       ],
       core: [
-        { trigger: 'blur', validator: validate.add, type: 'emptyArr', msg: '填报机构' }
+        { validator: validate.add, type: 'emptyArr', msg: '填报机构' }
       ]
     })
     // 时间快捷选择
@@ -96,6 +95,7 @@ export default {
     function check () {
       const keys = ctx.$refs.tree.getCheckedKeys()
       ctx.$store.commit('activity/SET_CORE', keys)
+      ctx.$refs.basic.validate('core')
     }
     getCore()
 
@@ -111,7 +111,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

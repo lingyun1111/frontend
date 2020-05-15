@@ -1,4 +1,4 @@
-import { getActivityList, getcore } from '@adminTemplate/api/activity'
+import { getActivityList, getcore, getdep } from '@adminTemplate/api/activity'
 
 const getDefaultState = () => {
   return {
@@ -20,10 +20,25 @@ const getDefaultState = () => {
         date: [],
         desc: '',
         core: []
+      },
+      setup: {
+        isVerify: false, // 需要数据管理员/班主任审核
+        isAllowModify: false, // 数据管理员/班主任可否增加填报人
+        isPublish: false, // 立即发布
+
+        fill: false, // 职工填报设定
+        fillBy: [], // 填报人设定
+        fillReplace: false, // 数据管理员代填（职工不可见）
+
+        student: false, // 学生数据填报设定开关
+        studentBy: [], // 学生 年级
+        studentReplace: false // 数据管理员/班主任代填（家长不可见）
       }
     },
-    // 机构数数组
-    cores: []
+    // 机构列表
+    cores: [],
+    // 部门列表
+    deps: []
   }
 }
 
@@ -39,8 +54,15 @@ const mutations = {
   SET_CORES: (state, val) => {
     state.cores = val
   },
+  SET_DEPS: (state, val) => {
+    state.deps = val
+  },
+  // 下面是表单内操作
   SET_CORE: (state, val = []) => {
     state.forms.basic.core = val
+  },
+  SET_STUDENTBY: (state, val = []) => {
+    state.forms.setup.studentBy = val
   }
 }
 
@@ -61,6 +83,12 @@ const actions = {
     const res = await getcore()
     const { data } = res
     commit('SET_CORES', data)
+  },
+  // 获取部门树
+  async getDep ({ commit, state }) {
+    const res = await getdep()
+    const { data } = res
+    commit('SET_DEPS', data)
   }
 }
 

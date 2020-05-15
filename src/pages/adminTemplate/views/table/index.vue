@@ -48,14 +48,13 @@
 <!--    编辑-->
     <dialog-model ref="dialog2" title="编辑" :width="`900px`">
       <Form ref="editRow">
-
         <template v-slot="{form}">
           {{form}}
           <el-button type="primary"  @click="editConfirm">编辑</el-button>
           <el-button @click="$refs.dialog2.dialogVisible = false">取 消</el-button>
         </template>
         <template v-slot:item="{form}">
-          <el-form-item label="工作(编辑)" prop="job">
+          <el-form-item label="工作(编辑才有)" prop="job">
             <el-input v-model="form.job"></el-input>
           </el-form-item>
         </template>
