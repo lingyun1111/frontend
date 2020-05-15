@@ -8,7 +8,7 @@
     <div style="margin-top: 35px">
       <basic ref="basic" v-if="active===0"></basic>
       <setup ref="setup" v-if="active===1"></setup>
-      <subject v-if="active===2"></subject>
+      <subject ref="subject" v-if="active===2"></subject>
 
       <div style="margin-top: 15px;text-align: center">
         <el-button round @click="active-=1" v-if="active>0">上一步</el-button>
@@ -33,7 +33,7 @@ export default {
 
     // 步骤条
     const active = ref(0)
-
+    // 下一步流程
     async function next () {
       let basic
       let setup

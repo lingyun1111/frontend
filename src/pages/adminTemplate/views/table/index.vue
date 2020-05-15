@@ -71,7 +71,7 @@ import Search from './search'
 import Form from './form'
 
 import { useTable } from './useTable'
-import { getCurrentInstance, ref, onMounted } from '@vue/composition-api'
+import { getCurrentInstance, ref } from '@vue/composition-api'
 export default {
   setup () {
     const xtc = getCurrentInstance()
@@ -110,10 +110,6 @@ export default {
       }
       btnLoading.value = false
     }
-
-    onMounted(() => {
-
-    })
     return {
       table,
       tablelist,
