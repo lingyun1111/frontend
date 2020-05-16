@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "serve": "vue-cli-service serve --adminTemplate mock",
     "mock-adminTemplate": "vue-cli-service serve --adminTemplate mock",
     "local-adminTemplate": "vue-cli-service serve --adminTemplate local",
     "local-mobileTemplate": "vue-cli-service serve --mobileTemplate local"
