@@ -2,7 +2,7 @@
   <div class="app-container">
 <!--    筛选-->
     <search>
-      <el-button type="primary" @click="$refs.dialog1.dialogVisible = true" class="el-icon-plus"> 新建(步骤条模式)</el-button>
+      <el-button type="primary"  @click="$refs.dialog1.dialogVisible = true" class="el-icon-plus"> 新建(步骤条模式)</el-button>
     </search>
 <!--    表格-->
     <el-table
@@ -52,7 +52,7 @@
 <!--    翻页-->
     <Pagination :table="table" @change="tablelist"></Pagination>
 <!--    新建-->
-    <dialog-model ref="dialog1" title="新建活动" :fullscreen="true">
+    <dialog-model ref="dialog1" title="新建活动" :fullscreen="true" :destroy="true">
       <forms ref="forms" @close="$refs.dialog1.dialogVisible=false"></forms>
     </dialog-model>
 
@@ -107,7 +107,17 @@ export default {
     function handleCommand (val, ref) {
       showComponent.value = val
       ctx.$refs[ref].dialogVisible = true
+      if (ref === 'dialog3') {
+        this.$nextTick(() => {
+          ctx.$store.commit('activity/RESET_FORMS')
+          const arr = showComponent.value.split(',')
+          arr.forEach(n => {
+            ctx.$refs[n].$refs[n].resetFields()
+          })
+        })
+      }
     }
+    // 编辑
     function edit () {
       let arr = showComponent.value.split(',')
       arr = arr.map(n => {
@@ -121,6 +131,7 @@ export default {
         console.log('err', err)
       })
     }
+
     return {
       table,
       tablelist,

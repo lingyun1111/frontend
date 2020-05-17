@@ -7,6 +7,8 @@
       :top="top"
       :fullscreen="fullscreen"
       :modal-append-to-body="false"
+      :destroy-on-close="destroy"
+      @opened="opened"
       :before-close="handleClose">
       <div>
         <slot></slot>
@@ -17,8 +19,7 @@
 
 <script>
 import { onDialog } from './onDialog'
-import { createComponent } from '@vue/composition-api'
-export default createComponent({
+export default {
   setup () {
     const { dialogVisible, handleClose } = onDialog()
     return {
@@ -36,7 +37,13 @@ export default createComponent({
     },
     fullscreen: {
       default: false
+    },
+    destroy: {
+      default: false
+    },
+    opened: {
+      default: Function
     }
   }
-})
+}
 </script>

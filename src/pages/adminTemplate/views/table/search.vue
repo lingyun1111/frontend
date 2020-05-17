@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import { reactive, createComponent } from '@vue/composition-api'
+import { reactive } from '@vue/composition-api'
 import { useTable } from './useTable'
-export default createComponent({
+export default {
   setup () {
     const { tablelist, table, SETTABLE } = useTable()
     const search = reactive({
@@ -41,6 +41,6 @@ export default createComponent({
       onSubmit
     }
   }
-})
+}
 
 </script>

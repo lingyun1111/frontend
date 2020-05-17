@@ -38,7 +38,7 @@
 <script>
 import validate from '@/utils/elementValidate/index.js'
 import { useForm } from './useForm'
-import { reactive, getCurrentInstance } from '@vue/composition-api'
+import { reactive, getCurrentInstance, watch } from '@vue/composition-api'
 export default {
   setup () {
     const ctx = getCurrentInstance()
@@ -52,7 +52,7 @@ export default {
         { required: true, message: '请选择活动时间', trigger: 'change' }
       ],
       core: [
-        { validator: validate.add, type: 'emptyArr', msg: '填报机构' }
+        { validator: validate.add, type: 'emptyArr', msg: '填报机构', trigger: 'change' }
       ]
     })
     // 时间快捷选择
@@ -91,14 +91,22 @@ export default {
       children: 'children',
       label: 'label'
     })
-
     function check () {
       const keys = ctx.$refs.tree.getCheckedKeys()
       ctx.$store.commit('activity/SET_CORE', keys)
       ctx.$refs.basic.validate('core')
     }
+    watch(() => Basic.value.core,
+      (value) => {
+        ctx.$nextTick(() => {
+          ctx.$refs.tree.setCheckedKeys(value)
+        })
+      },
+      {
+        deep: true
+      }
+    )
     getCore()
-
     return {
       Basic,
       rules,
