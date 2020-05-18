@@ -24,10 +24,8 @@
 
 <script>
 import { reactive, getCurrentInstance } from '@vue/composition-api'
-import { useTable } from './useTable'
 export default {
   setup () {
-    const { tablelist } = useTable()
     const xtc = getCurrentInstance()
     const ruleForm = reactive({
       name: null,
@@ -75,7 +73,6 @@ export default {
       ruleForm,
       rules,
       resetFields,
-      tablelist,
       add,
       edit
     }
